@@ -1,0 +1,4 @@
+https://www.netguru.com/blog/python-flask-versus-fastapi#:~:text=Flask%20is%20a%20lightweight%20option,support%20for%20high-performance%20APIs.
+
+Choosing between Flask and FastAPI hinges on understanding their respective strengths and weaknesses. Flask's simplicity and flexibility make it a go-to choice for many developers, especially for small-scale projects or those in the realm of data science and machine learning. It allows for quick setup and iteration, and an extensive set of third-party extensions can enrich its functionalities. However, resource consumption can be a concern as applications scale. In contrast, FastAPI, with its modern architecture, is designed for speed, handling requests and responses more efficiently, which can sustain an application without putting undue strain on system resources.
+
