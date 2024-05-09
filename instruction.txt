@@ -1,0 +1,32 @@
+Windows:
+
+Virtual environment (cmd):
+> python -m venv ai
+> .\ai\Scripts\activate.bat
+
+> deactivate # do it once you are finished
+
+Install dependencies:
+pip install -r requirements.txt
+
+Install Ollama:
+https://github.com/ollama/ollama
+Download the Windows preview and install it
+
+Linux or mac:
+
+Virtual environment (shell):
+> python3 -m venv ai
+> source ai/bin/activate 
+
+> deactivate # do it once you are finished
+
+Install dependencies:
+pip3 install -r requirements.txt
+
+Install Ollama:
+https://github.com/ollama/ollama # for installation steps
+# for more info on linux
+https://github.com/ollama/ollama/blob/main/docs/linux.md 
+# for this project you should only need to run this line:
+> curl -fsSL https://ollama.com/install.sh | sh
