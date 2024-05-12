@@ -29,22 +29,20 @@ tools = [
         query_engine=recetas1_query_engine,
         metadata=ToolMetadata(
             name="recipes_data",
-            description="this gives information about some known recipes and their instructions on how to cook them"
+            description="This gives recipes that match the given ingredients, and how to cook them"
         )
     )
 ]
 
 agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
 
-while (prompt := input("Enter a list of ingredients (q to quit): ")) != "q":
+def get_recipes(ingredients_list):
     try:
-        result = agent.query(prompt)
+        result = agent.query(f"{ingredients_list}")
     except:
         result = "No results or an error occurred"
 
-    json_result = {
-        "answer": result
+    dic_result = {
+        "answer": f"{result}"
     }
-
-    print(json_result)
-    save_json(json_result)
+    return dic_result
