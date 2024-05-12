@@ -1,5 +1,5 @@
 API Flask - https://youtu.be/zsYIw6RXjfM?si=57movMmL76f54iWY (Tech With Tim)
 API FastAPI - https://youtu.be/-ykeT6kk4bk?si=R1heeL7g3kquMMBJ (Tech With Tim)
-RAG - https://youtu.be/uO6r0vQmGB0?si=W6vX2Fcbwu29_NLf (Tech With Time)
-AI Agent Tutorial example - https://youtu.be/JLmI0GJuGlY?si=E-V7i7zpCRxltXgn (Tech With Time)
+RAG - https://youtu.be/uO6r0vQmGB0?si=W6vX2Fcbwu29_NLf (Tech With Tim)
+AI Agent Tutorial example - https://youtu.be/ul0QsodYct4?si=h9y_lqPywStfiOE- (Tech With Tim)
 FastAPI & Token Authentication - https://youtu.be/5GxQ1rLTwaU?si=_Fp4yLYk8roLrQj1 (Akamai Developer)
