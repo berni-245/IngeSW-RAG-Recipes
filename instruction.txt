@@ -9,7 +9,7 @@ Virtual environment (cmd):
 > deactivate # do it once you are finished
 
 Install dependencies: # You might need to install windows 10 sdk and cmake tools, do it from the link the error provides
-pip install pypdf python-dotenv pandas fastapi uvicorn
+pip install pypdf python-dotenv pandas fastapi uvicorn llama_index llama_index.llms.gemini llama_index.experimental
 
 Linux or mac:
 
@@ -19,5 +19,13 @@ Virtual environment (shell):
 
 > deactivate # do it once you are finished
 
-Install dependencies:
-pip3 install pypdf python-dotenv pandas fastapi uvicorn
+Install dependencies to VM:
+> pip3 install pypdf python-dotenv pandas fastapi uvicorn llama_index llama_index.llms.gemini llama_index.experimental
+
+To execute on either:
+
+run:
+> uvicorn llmAPI:app
+
+Acceso:
+Acceder a la IP local y al subdir docs
