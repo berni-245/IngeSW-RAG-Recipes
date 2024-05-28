@@ -28,16 +28,17 @@ tools = [
         query_engine=recetas1_query_engine,
         metadata=ToolMetadata(
             name="recipes_data",
-            description="This gives recipes that match the given ingredients, and how to cook them"
+            description="This returns recipes that match the given a 'ingredients list' and not matches the 'blacklisted list', and how to cook them, send the input in string format."
         )
     )
 ]
 
 agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
 
-def get_recipes(ingredients_list):
+def get_recipes(ingredients_list, blacklisted_ingredients):
+    filtered_list = remove_blacklisted(ingredients_list, blacklisted_ingredients)
     try:
-        result = agent.query(f"{ingredients_list}")
+        result = agent.query(f"ingredients list={filtered_list} blacklisted ingredients={blacklisted_ingredients}")
     except:
         result = "No results or an error occurred"
 
@@ -45,3 +46,10 @@ def get_recipes(ingredients_list):
         "answer": f"{result}"
     }
     return dic_result
+
+def remove_blacklisted(ingredients_list, blacklisted_ingredients):
+    blacklisted_set = set(blacklisted_ingredients)
+    
+    filtered_list = [ingredient for ingredient in ingredients_list if ingredient not in blacklisted_set]
+    
+    return filtered_list
