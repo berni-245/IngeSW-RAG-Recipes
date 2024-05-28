@@ -2,5 +2,8 @@
 __pycache__/
 ai/
 
+# Package files
+package/
+
 # Output file
 output.json

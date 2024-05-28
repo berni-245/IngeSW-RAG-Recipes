@@ -13,7 +13,6 @@ from prompts import new_prompt, instruction_str, context
 from llama_index.experimental.query_engine import PandasQueryEngine
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import ReActAgent
-from utils import save_json
 
 recetas1_path = os.path.join("data", "recetas1.csv")
 recetas1_df = pd.read_csv(recetas1_path)
