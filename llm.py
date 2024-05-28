@@ -37,14 +37,19 @@ agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
 
 def get_recipes(ingredients_list, blacklisted_ingredients):
     filtered_list = remove_blacklisted(ingredients_list, blacklisted_ingredients)
-    try:
-        result = agent.query(f"ingredients list={filtered_list} blacklisted ingredients={blacklisted_ingredients}")
-    except:
-        result = "No results or an error occurred"
+    if len(filtered_list) != 0:
+        try:
+            result = agent.query(f"ingredients list={filtered_list} blacklisted ingredients={blacklisted_ingredients}")
+        except:
+            result = "No results or an error occurred"
 
-    dic_result = {
-        "answer": f"{result}"
-    }
+        dic_result = {
+            "answer": f"{result}"
+        }
+    else:
+        dic_result = {
+            "answer": "No blacklisted ingredients were provided"
+        }
     return dic_result
 
 def remove_blacklisted(ingredients_list, blacklisted_ingredients):
