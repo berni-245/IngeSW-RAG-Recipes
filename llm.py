@@ -34,9 +34,9 @@ tools = [
     )
 ]
 
-agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
+agent = ReActAgent.from_tools(tools, llm=llm, verbose=False, context=context)
 
-def get_recipes(ingredients_list, blacklisted_ingredients, max_retries=3, retry_delay=2):
+def get_recipes(ingredients_list, blacklisted_ingredients, max_retries=3, retry_delay=0):
     filtered_list = remove_blacklisted(ingredients_list, blacklisted_ingredients)
 
     if len(filtered_list) <= 0:
