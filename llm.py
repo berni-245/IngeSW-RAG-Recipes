@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import time
 import pandas as pd
 from llama_index.llms.gemini import Gemini
 from llama_index.core import Settings
@@ -35,21 +36,32 @@ tools = [
 
 agent = ReActAgent.from_tools(tools, llm=llm, verbose=True, context=context)
 
-def get_recipes(ingredients_list, blacklisted_ingredients):
+def get_recipes(ingredients_list, blacklisted_ingredients, max_retries=3, retry_delay=2):
     filtered_list = remove_blacklisted(ingredients_list, blacklisted_ingredients)
-    if len(filtered_list) != 0:
+
+    if len(filtered_list) <= 0:
+        dic_result = {
+                "answer": "There's no ingredients or all of them are blacklisted"
+        }
+        return dic_result
+
+    success = False
+    attempts = 0
+
+    while not success and attempts < max_retries:
+        attempts += 1
+    
         try:
             result = agent.query(f"ingredients list={filtered_list} blacklisted ingredients={blacklisted_ingredients}")
-        except:
-            result = "No results or an error occurred"
+            success = True  # Si la consulta es exitosa, marca el éxito
+        except Exception as e:
+            result = f"{e}"
+            time.sleep(retry_delay)  # Espera antes de reintentar
 
         dic_result = {
             "answer": f"{result}"
         }
-    else:
-        dic_result = {
-            "answer": "No blacklisted ingredients were provided"
-        }
+
     return dic_result
 
 def remove_blacklisted(ingredients_list, blacklisted_ingredients):
