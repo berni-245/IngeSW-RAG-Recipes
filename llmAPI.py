@@ -23,7 +23,7 @@ class Ingredients(BaseModel):
 app = FastAPI()
 
 @app.post("/request-recipes")
-async def request_recipes(ingredients: Ingredients):
+def request_recipes(ingredients: Ingredients):
     recipes = get_recipes(ingredients_list=ingredients.ingredients_list, blacklisted_ingredients=ingredients.blacklisted_ingredients, 
     max_retries=3)
 
