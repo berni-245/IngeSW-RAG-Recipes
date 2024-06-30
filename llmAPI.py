@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Path, Query, HTTPException, status
 from pydantic import BaseModel
 from llm import get_recipes
+from fastapi.responses import JSONResponse
 from mangum import Mangum
 
 class Ingredients(BaseModel):
@@ -22,7 +23,14 @@ class Ingredients(BaseModel):
 app = FastAPI()
 
 @app.post("/request-recipes")
-def request_recipes(ingredients: Ingredients):
-    return get_recipes(ingredients_list=ingredients.ingredients_list, blacklisted_ingredients=ingredients.blacklisted_ingredients)
+async def request_recipes(ingredients: Ingredients):
+    recipes = get_recipes(ingredients_list=ingredients.ingredients_list, blacklisted_ingredients=ingredients.blacklisted_ingredients, 
+    max_retries=3)
+
+    if "error" in recipes.keys():
+        return JSONResponse(status_code=404, content=recipes)
+    
+    return recipes
+
 
 handler = Mangum(app)

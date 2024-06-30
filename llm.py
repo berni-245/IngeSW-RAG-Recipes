@@ -37,11 +37,17 @@ tools = [
 agent = ReActAgent.from_tools(tools, llm=llm, verbose=False, context=context)
 
 def get_recipes(ingredients_list, blacklisted_ingredients, max_retries=3, retry_delay=0):
+    if max_retries <= 0:
+        dic_result = {
+                "error": "Max retries is lower or equal than zero"
+        }
+        return dic_result
+
     filtered_list = remove_blacklisted(ingredients_list, blacklisted_ingredients)
 
     if len(filtered_list) <= 0:
         dic_result = {
-                "answer": "There's no ingredients or all of them are blacklisted"
+                "error": "There's no ingredients or all of them are blacklisted"
         }
         return dic_result
 
@@ -53,14 +59,14 @@ def get_recipes(ingredients_list, blacklisted_ingredients, max_retries=3, retry_
     
         try:
             result = agent.query(f"ingredients list={filtered_list} blacklisted ingredients={blacklisted_ingredients}")
-            success = True  # Si la consulta es exitosa, marca el éxito
+            success = True
         except Exception as e:
-            result = f"{e}"
-            time.sleep(retry_delay)  # Espera antes de reintentar
+            result = "An error occurred with the Gemini AI api server"
+            time.sleep(retry_delay)
 
-        dic_result = {
-            "answer": f"{result}"
-        }
+    dic_result = {
+        "answer" if success else "error": f"{result}"
+    }
 
     return dic_result
 
